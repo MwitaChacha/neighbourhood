@@ -10,7 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -79,6 +83,11 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+cloudinary.config( 
+  cloud_name = "dgkojinst", 
+  api_key = "938237336993178", 
+  api_secret = "PpuLrBceEgRwpOX1yU1Q2nOJIlE" 
+)
 
 
 # Password validation
