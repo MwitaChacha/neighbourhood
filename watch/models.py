@@ -127,3 +127,24 @@ class Post(models.Model):
         """   
         post = Post.objects.filter(id=neighbourhood_id)
         return post     
+    
+# Authority Model 
+class Authority(models.Model):
+    name =models.CharField(max_length=100)
+    email = models.EmailField()
+    contact = models.IntegerField()
+    neighbourhood = models.ForeignKey(NeighbourHood,on_delete=models.CASCADE)
+ 
+    def __str__(self):
+        return self.name      
+    
+# Health Model   
+
+class Health(models.Model):
+    name =models.CharField(max_length=100)
+    email = models.EmailField()
+    contact = models.IntegerField()
+    neighbourhood = models.ForeignKey(NeighbourHood,on_delete=models.CASCADE)
+ 
+    def __str__(self):
+        return self.name  
