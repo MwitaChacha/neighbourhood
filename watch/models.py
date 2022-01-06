@@ -109,3 +109,21 @@ class Business(models.Model):
         business = cls.objects.filter(id=id).update(id=id)
         return business
     
+
+# Post Model
+class Post(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    info =  HTMLField()
+    neighbourhood= models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, related_name='neighbourhood_post')
+    posted_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.title
+         
+    @classmethod
+    def get_post(cls, id):
+        """
+        A method that gets a post using the given id
+        """   
+        post = Post.objects.filter(id=neighbourhood_id)
+        return post     
