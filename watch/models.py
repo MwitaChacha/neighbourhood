@@ -72,3 +72,40 @@ class Business(models.Model):
         
     def __str__(self):
         return self.name      
+    
+    def create_business(self):
+        """
+        A method that creates a business
+        """
+        self.save()
+
+    def delete_business(self):
+        """
+        A method that deletes a business
+        """        
+        self.delete()
+            
+    @classmethod
+    def search_business(cls,search_term):
+        """
+        A method that searches a business
+        """          
+        businesses = cls.objects.filter(name__icontains = search_term).all()
+        return businesses 
+    
+    @classmethod
+    def find_business(cls, business_id):
+        """
+        A method that finds a business using its id
+        """         
+        business = Business.objects.filter(id=business_id)
+        return business  
+    
+    @classmethod
+    def update_business(cls, id):
+        """
+        A method that updates a business using its id
+        """  
+        business = cls.objects.filter(id=id).update(id=id)
+        return business
+    
