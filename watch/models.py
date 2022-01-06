@@ -17,3 +17,30 @@ class NeighbourHood(models.Model):
     
     def __str__(self):
         return self.name 
+    
+    def create_neighborhood(self):
+        """
+        A method that creates a neighbourhood
+        """
+        self.save()
+        
+    def delete_neighborhood(self):
+        """
+        A method that deletes a neighbourhood
+        """
+        self.delete()    
+        
+    @classmethod
+    def find_neighborhood(cls, neighborhood_id):
+        """
+        A method that finds a neighbourhood using its id
+        """
+        return cls.objects.filter(id=neighborhood_id) 
+    
+    @classmethod
+    def update_neighbourhood(cls, id):
+        """
+        A method that updates a neighbourhood
+        """
+        neighbourhood = cls.objects.filter(id=id).update(id=id)
+        return neighbourhood       
