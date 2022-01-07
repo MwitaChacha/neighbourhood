@@ -13,4 +13,5 @@ urlpatterns=[
    path('post/<hood_id>',views.post, name = 'post'), 
    path('business/<id>',views.createbusiness, name = 'createbusiness'),
    path('search/',views.search_results, name='search_results'),
+   path('join_neighbourhood/<id>', views.join_neighbourhood, name='join-neighbourhood'),
 ]
