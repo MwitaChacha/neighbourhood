@@ -46,3 +46,19 @@ def profile(request,pk):
     current_user = request.user
     return render(request,'profile.html',{"current_user":current_user, "user":user, "profiles":profiles})
  
+
+
+@login_required(login_url='/accounts/login/')
+def createhood(request):
+    current_user = request.user
+    form = HoodForm(request.POST, request.FILES)
+    if request.method == 'POST':  
+        if form.is_valid():
+            hood = form.save(commit=False)
+            hood.user = request.user
+            hood.save()
+            return redirect ('index')
+        else:
+            form = ProfileForm()
+    return render(request,'create-hood.html',{'form':form})
+ 
