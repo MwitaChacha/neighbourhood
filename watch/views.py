@@ -62,3 +62,15 @@ def createhood(request):
             form = ProfileForm()
     return render(request,'create-hood.html',{'form':form})
  
+
+
+@login_required(login_url='/accounts/login/')
+def neighbourhood(request,id):
+    posts = Post.objects.all().order_by('-posted_at').filter(neighbourhood_id=id)
+    hood = NeighbourHood.objects.get(id=id)
+    police = Authority.objects.all().filter(neighbourhood_id=id) 
+    health = Health.objects.all().filter(neighbourhood_id=id) 
+    businesses = Business.objects.all().filter(neighbourhood_id=id)
+    return render(request,'neighbourhood.html',{'hood':hood,'police':police,'health': health,'posts':posts,'businesses': businesses})
+ 
+ 
