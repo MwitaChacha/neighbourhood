@@ -37,3 +37,12 @@ def update_profile(request):
             form = ProfileForm()
     return render(request, 'update-profile.html', {'form': form})
  
+ 
+
+@login_required(login_url='/accounts/login/')
+def profile(request,pk):
+    user = User.objects.get(pk = pk)
+    profiles = Profile.objects.filter(user = user).all()
+    current_user = request.user
+    return render(request,'profile.html',{"current_user":current_user, "user":user, "profiles":profiles})
+ 
