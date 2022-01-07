@@ -91,3 +91,21 @@ def post(request, hood_id):
             form = PostForm()
     return render(request,'post.html',{'hood':hood, 'form':form})
  
+ 
+ 
+@login_required(login_url='/accounts/login/') 
+def createbusiness(request, id):
+    hood = NeighbourHood.objects.get(id=id)
+    current_user = request.user
+    form = BusinessForm(request.POST, request.FILES)
+    if request.method == 'POST':   
+        if form.is_valid():
+            busi = form.save(commit=False)
+            busi.user = request.user
+            busi.neighbourhood = hood
+            busi.save()
+            return redirect ('neighbourhood', id=hood.id)
+        else:
+            form = BusinessForm()
+    return render(request,'create-business.html',{'hood':hood, 'form':form})
+
