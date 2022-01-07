@@ -22,9 +22,10 @@
                     {% if profile.neighbourhood %}
                     <p><i class="fas fa-home me-2"></i>{{profile.neighbourhood}}</p>
                     {% else %}
-                    <p><i class="fas fa-home me-2"></i>Join a neighbourhood</p>
+                    <p class="text-small text-muted"><i class="fas fa-home me-2"></i><em>Join a neighbourhood for it to be displayed here</em></p>
                     {% endif %}
                     {% endfor %}
+                    <a href="{% url 'logout' %}"><p><i style="color:red" class="fas fa-power-off me-2"></i>Logout</p></a>
                 </div>
             </div>
         </div>

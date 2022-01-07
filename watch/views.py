@@ -66,12 +66,14 @@ def createhood(request):
 
 @login_required(login_url='/accounts/login/')
 def neighbourhood(request,id):
+    user = request.user
     posts = Post.objects.all().order_by('-posted_at').filter(neighbourhood_id=id)
     hood = NeighbourHood.objects.get(id=id)
     police = Authority.objects.all().filter(neighbourhood_id=id) 
     health = Health.objects.all().filter(neighbourhood_id=id) 
     businesses = Business.objects.all().filter(neighbourhood_id=id)
-    return render(request,'neighbourhood.html',{'hood':hood,'police':police,'health': health,'posts':posts,'businesses': businesses})
+    profiles = Profile.objects.filter(user = user).all()
+    return render(request,'neighbourhood.html',{'hood':hood,'police':police,'health': health,'posts':posts,'businesses': businesses,'profiles':profiles})
  
 
 
