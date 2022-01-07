@@ -121,3 +121,18 @@ def search_results(request):
   else:
     message="You haven't searched for any term."  
     return render(request,'search.html',{"message":message,"results":searched_users})
+
+
+
+def join_neighbourhood(request, id):
+    neighbourhood = get_object_or_404(NeighbourHood, id=id)
+    request.user.profile.neighbourhood = neighbourhood
+    request.user.profile.save()
+    return redirect('index')
+
+
+def move_neighbourhood(request, id):
+    neighbourhood = get_object_or_404(NeighbourHood, id=id)
+    request.user.profile.neighbourhood = None
+    request.user.profile.save()
+    return redirect('index')
