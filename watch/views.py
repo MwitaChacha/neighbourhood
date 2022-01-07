@@ -73,4 +73,21 @@ def neighbourhood(request,id):
     businesses = Business.objects.all().filter(neighbourhood_id=id)
     return render(request,'neighbourhood.html',{'hood':hood,'police':police,'health': health,'posts':posts,'businesses': businesses})
  
+
+
+@login_required(login_url='/accounts/login/')
+def post(request, hood_id):
+    hood = NeighbourHood.objects.get(id=hood_id)
+    current_user = request.user
+    form = PostForm(request.POST, request.FILES)
+    if request.method == 'POST':  
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.neighbourhood = hood
+            post.save()
+            return redirect ('neighbourhood', hood_id)
+        else:
+            form = PostForm()
+    return render(request,'post.html',{'hood':hood, 'form':form})
  
